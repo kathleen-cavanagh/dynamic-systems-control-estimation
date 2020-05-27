@@ -6,7 +6,7 @@ from typing import Any, Dict, Optional, Tuple
 from pydrake.math import sin, cos
 from pydrake.symbolic import inv
 
-from DynamicSystems.base import DynamicSystem, MeasurementRelation
+from systems.base import DynamicSystem, MeasurementRelation
 from utils import wrap_angles
 
 

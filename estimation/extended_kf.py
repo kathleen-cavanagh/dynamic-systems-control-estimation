@@ -2,8 +2,8 @@
 import numpy as np
 from scipy import integrate
 
-from DynamicSystems.base import DynamicSystem, MeasurementRelation
-from StateEstimation.kalman_filter import KalmanFilter
+from systems.base import DynamicSystem, MeasurementRelation
+from estimation.kalman_filter import KalmanFilter
 
 class ExtendedKF(KalmanFilter):
 

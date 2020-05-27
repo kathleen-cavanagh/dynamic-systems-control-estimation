@@ -8,7 +8,7 @@ from scipy import integrate
 import pydrake.solvers.mathematicalprogram as math_prog
 from pydrake.systems.controllers import LinearQuadraticRegulator
 
-from DynamicSystems.trajectory import trajectory_dtype
+from systems.trajectory import trajectory_dtype
 
 
 def wrap_angles(theta: float) -> float:

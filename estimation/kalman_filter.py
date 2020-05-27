@@ -1,11 +1,9 @@
 """Simple Kalman Filter implementation."""
 from abc import ABC, abstractmethod
 
-from typing import Callable
-
 import numpy as np
 
-from DynamicSystems.base import DynamicSystem
+from systems.base import DynamicSystem, MeasurementRelation
 
 
 class KalmanFilter(ABC):
@@ -33,7 +31,7 @@ class KalmanFilter(ABC):
 
     @abstractmethod
     def update(
-        self, measurement: np.ndarray, relation: Callable, R: np.ndarray
-    ) -> None:
+        self, measurement: np.ndarray, relation: MeasurementRelation,
+        R: np.ndarray) -> None:
         """Update estimate based on measurement received."""
         pass
