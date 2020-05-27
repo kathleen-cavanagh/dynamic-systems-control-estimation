@@ -93,20 +93,21 @@ class SystemTrajectoryOptimization():
 
         Arguments:
             s0: initial state
+            sf: final state
         """
         self.s0 = s0
         self.sf = sf
         derivs_init = self.system.derivative(
             self.t[0], s0.astype(object), self.input_var[0][0], dtype = object)
-        x_expected_init = s0.astype(object) + (self.t[1]- self.t[0]) * derivs_init
-        self.add_dynamic_constraint(self.state_var[0], x_expected_init)
+        x_expected = s0.astype(object) + (self.t[1]- self.t[0]) * derivs_init
+        self.add_dynamic_constraint(self.state_var[0], x_expected)
 
         #during trajectory
         for t in range(1, self.n_knot-1):
             deriv = self.system.derivative(
                 self.t[t], self.state_var[t-1], self.input_var[t][0],
                 dtype = object)
-            dt = self.t[t] - self.t[t-1]
+            dt = self.t[t+1] - self.t[t]
             x_expected = self.state_var[t-1] + dt * deriv
             self.add_dynamic_constraint(self.state_var[t], x_expected)
 
