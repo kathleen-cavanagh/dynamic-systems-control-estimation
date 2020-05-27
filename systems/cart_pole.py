@@ -14,7 +14,7 @@ class CartPole(DynamicSystem):
 
     """Implementation of the dynamics of a Cart-Pole system."""
 
-    def __init__(self, mass_cart: float = 1, mass_pendulum:float = 1,
+    def __init__(self, mass_cart: float = 1, mass_pendulum: float = 1,
                  pendulum_length: float = 1, gravity: float = 9.8) -> None:
         """
         Initialize CartPole system with physical parameters.

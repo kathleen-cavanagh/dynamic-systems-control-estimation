@@ -2,33 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from systems.cart_pole import CartPole
-from utils import direct_collocation
+from systems.trajectory import SystemTrajectoryOptimization
 
-parameters = {
-    'mass_cart': 1,
-    'mass_pendulum': 1,
-    'pendulum_length': 1,
-    'gravity': 9.8
-}
-
-cp = CartPole(parameters)
+cp = CartPole()
 s0 = np.array([0, 0, 0, 0])
-sf = np.array([np.nan, np.pi, 0, 0])
+sf = np.array([0, np.pi, 0, 0])
 
 constraints = {
     'u': 20, 'state': np.full(cp.n_state, np.nan)
 }
 
-sol = direct_collocation(
-    cp, s0, sf, 50, constraints, n_knot = 500, slack = .001)
+traj_opt = SystemTrajectoryOptimization(cp, 50, knot_points = 500, slack = .01)
 
+traj_opt.add_direct_collocation_constraints(s0, sf)
 
-plt.plot(sol['t'], sol['state'][:, 0], label = 'x')
-plt.plot(sol['t'], sol['state'][:, 1], label = 'theta')
-plt.plot(sol['t'], sol['state'][:, 2], label = 'v')
-plt.plot(sol['t'], sol['state'][:, 3], label = 'omega')
-plt.legend()
-plt.show()
+traj_opt.solve_program()
 
-plt.plot(sol['t'], sol['input'])
-plt.show()
+sol = traj_opt.solution
